@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:portfolio/widgets/txt_widget.dart';
+import 'package:country_icons/country_icons.dart';
 
 void main() => runApp(const ProfileWidget());
 
@@ -59,55 +63,245 @@ class ProfileWidget extends StatelessWidget {
   Widget buildContent() => Column(
         children: [
           const SizedBox(height: 8),
-          const Text('Aziz Chtourou',
+          const Text('Mhamed Aziz Chtourou',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           const SizedBox(height: 8),
           const Text(
-            'Software Engineer',
+            'Développeur ',
             style: TextStyle(fontSize: 16, color: Colors.black),
           ),
           const SizedBox(height: 16),
           const Divider(),
           const SizedBox(height: 16),
-          buildAbout("About Me","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
-          const Text("------------------------------------------------------------------------------------------"),
-          buildAbout("Éducation","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
-          const Text("------------------------------------------------------------------------------------------"),
-          buildAbout("Éxpérience","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
-          const Text("------------------------------------------------------------------------------------------"),
-          buildAbout("Formations","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
-          const Text("------------------------------------------------------------------------------------------"),
-          buildAbout("Club ","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
-          const Text("------------------------------------------------------------------------------------------"),
-          buildAbout("Langues","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
-          const Text("------------------------------------------------------------------------------------------"),
-          buildAbout("Hobbies","Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",),
+          buildAbout(),
+          buildDiv(),
+          buildEducation(),
+          buildDiv(),
+          buildFormation(),
+          buildDiv(),
+          buildClub(),
+          buildDiv(),
+          buildLangue(),
+          buildDiv(),
+          buildHobbies(),
           const SizedBox(
             height: 32,
           ),
         ],
       );
 
-  Widget buildAbout(String titre, String desc) => Container(
+  Widget buildAbout() => Container(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-                titre,
+            Text("À Propos",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 )),
             SizedBox(height: 2),
             Text(
-              desc,
-              // textAlign: TextAlign.justify,
+              "Étudiant en 3ème année de licence en informatique à l'ISET Sfax, spécialisé "
+                  "en développement de systèmes d'information, je bénéficie d'une solide formation théorique en sciences"
+                  " informatiques.",
+              textAlign: TextAlign.justify,
               style: TextStyle(fontSize: 14, height: 1.4),
             ),
-            SizedBox(height: 20,)
+            SizedBox(
+              height: 20,
+            )
           ],
         ),
       );
-}
 
+  Widget buildDiv() => const Text(
+        "--------------------------------------------------------------------------------",
+      );
+
+  Widget buildEducation() => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Education",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ChildWidget(
+              icon: Iconsax.teacher,
+              title: 'Licence en informatique',
+              subTitle: 'Iset Sfax - 2024',
+            ),
+            ChildWidget(
+              icon: Iconsax.courthouse,
+              title: 'Baccalauréat ',
+              subTitle: 'Lyceé Monji Slim Sfax - 2021',
+            ),
+          ],
+        ),
+      );
+
+  Widget buildLangue() => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Langues",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ListTile(
+              leading: SvgPicture.asset(
+                'icons/flags/svg/tn.svg',
+                package: 'country_icons',
+                height: 20,
+              ),
+              title: const Text('Arabe : Native'),
+            ),
+            ListTile(
+              leading: SvgPicture.asset(
+                'icons/flags/svg/fr.svg',
+                package: 'country_icons',
+                height: 20,
+              ),
+              title: const Text('Français : Bien'),
+            ),
+            ListTile(
+              leading: SvgPicture.asset(
+                'icons/flags/svg/gb.svg',
+                package: 'country_icons',
+                height: 16,
+              ),
+              title: const Text('Anglais : Bien'),
+            ),
+          ],
+        ),
+      );
+
+  Widget buildHobbies() => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Hobbies",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.book,
+                size: 30,
+                color: Color(0xFF3081D0),
+              ),
+              title: Text('Lecture'),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.library_music,
+                size: 30,
+              ),
+              title: Text('Musique'),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.sports_soccer,
+                size: 30,
+                color: Color(0xFF6B240C),
+              ),
+              title: Text('Sport'),
+            ),
+          ],
+        ),
+      );
+  Widget buildClub() => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child: const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Clubs",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.verified,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text('NMTF Club  - Membre 2021'),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.verified,
+            size: 30,
+            color: Color(0xFF3081D0),
+
+          ),
+          title: Text('JCEN Club  - Membre 2020'),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.verified,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text('EMUN Club - Membre 2021'),
+        ),
+      ],
+    ),
+  );
+  Widget buildFormation() => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child: const Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Formations",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.assignment,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text('Certificat AWS - Juillet 2022'),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.assignment,
+            size: 30,
+            color: Color(0xFF3081D0),
+
+          ),
+          title: Text('Certificat SCRUM - Mai 2020'),
+        ),
+        ListTile(
+          leading: Icon(
+            Icons.assignment,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text('Certificat TOEIC - Mars 2018'),
+        ),
+      ],
+    ),
+  );
+
+}

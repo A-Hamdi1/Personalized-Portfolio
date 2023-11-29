@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../components/navbar_page.dart';
 import '../constant/Colors.dart';
@@ -12,8 +14,6 @@ class AboutPage extends StatefulWidget {
 }
 
 class _AboutPageState extends State<AboutPage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,76 +48,80 @@ class _AboutPageState extends State<AboutPage> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 55.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage("images/me.jpg"),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: CircleAvatar(
-                          radius: 13,
-                          backgroundColor: TColors.primary,
-                          child: Icon(
-                            Icons.verified,
-                            color: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 55.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundImage: AssetImage("images/me.jpg"),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: CircleAvatar(
+                            radius: 13,
+                            backgroundColor: TColors.primary,
+                            child: Icon(
+                              Icons.verified,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text("Aziz Chtourou",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildSocialIcon(FontAwesomeIcons.instagram, _launchInstagram),
-                      const SizedBox(width: 12),
-                      buildSocialIcon(FontAwesomeIcons.github, _launchGithub),
-                      const SizedBox(width: 12),
-                      buildSocialIcon(FontAwesomeIcons.facebook, _launchFacebook),
-                      const SizedBox(width: 12),
-                      buildSocialIcon(FontAwesomeIcons.linkedin, _launchLinkedin),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildFollowButton("Call", () {
-                        _callNumber();
-                      }),
-                      SizedBox(width: 16),
-                      buildFollowButton("Mail", () {
-                        _sendEmail();
-                      }),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text("Aziz Chtourou",
+                          style: TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold)),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        buildSocialIcon(
+                            FontAwesomeIcons.instagram, _launchInstagram),
+                        const SizedBox(width: 12),
+                        buildSocialIcon(FontAwesomeIcons.github, _launchGithub),
+                        const SizedBox(width: 12),
+                        buildSocialIcon(
+                            FontAwesomeIcons.facebook, _launchFacebook),
+                        const SizedBox(width: 12),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-        ],
+            SizedBox(
+              height: 50,
+            ),
+            buildContact(),
+            SizedBox(
+              height: 10,
+            ),
+            buildMail(),
+            SizedBox(
+              height: 10,
+            ),
+            buildAdresse(),
+            SizedBox(
+              height: 10,
+            ),
+            buildTranslate(),
+            SizedBox(
+              height: 40,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -135,22 +139,28 @@ class _AboutPageState extends State<AboutPage> {
       ),
     );
   }
+
   Widget buildSocialIcon(IconData icon, onTap) => CircleAvatar(
-    radius: 25,
-    child: Material(
-      shape: const CircleBorder(),
-      clipBehavior: Clip.hardEdge,
-      color: Colors.black38,
-      child: InkWell(
-        onTap: onTap,
-        child: Center(child: Icon(icon, size: 32,color: Colors.white,)),
-      ),
-    ),
-  );
+        radius: 25,
+        child: Material(
+          shape: const CircleBorder(),
+          clipBehavior: Clip.hardEdge,
+          color: Colors.black38,
+          child: InkWell(
+            onTap: onTap,
+            child: Center(
+                child: Icon(
+              icon,
+              size: 32,
+              color: Colors.white,
+            )),
+          ),
+        ),
+      );
 }
 
 void _callNumber() async {
-  Uri dialNumber = Uri(scheme: 'tel', path: '+21623757648');
+  Uri dialNumber = Uri(scheme: 'tel', path: '+21629579776');
   if (!await launchUrl(dialNumber)) {
     throw Exception('Could not launch $dialNumber');
   }
@@ -159,8 +169,8 @@ void _callNumber() async {
 void _sendEmail() async {
   final Uri _emailLaunchUri = Uri(
     scheme: 'mailto',
-    path: 'hamdi.akram.dev@gmail.com',
-    queryParameters: {'subject': 'Demande Projet'},
+    path: 'azizchtourou330@gmail.com',
+    queryParameters: {'subject': 'Contact'},
   );
 
   if (!await launchUrl(_emailLaunchUri)) {
@@ -169,29 +179,183 @@ void _sendEmail() async {
 
   await launchUrl(_emailLaunchUri);
 }
+
 Future<void> _launchFacebook() async {
-  final Uri _urlFac = Uri.parse('https://www.facebook.com/Akram.Hamdi.Dev');
+  final Uri _urlFac =
+      Uri.parse('https://www.facebook.com/profile.php?id=100082276860382');
   if (!await launchUrl(_urlFac)) {
     throw Exception('Could not launch $_urlFac');
   }
 }
 
 Future<void> _launchGithub() async {
-  final Uri _urlGit = Uri.parse('https://github.com/A-Hamdi1');
+  final Uri _urlGit = Uri.parse('https://github.com/aziz-chtourou');
   if (!await launchUrl(_urlGit)) {
     throw Exception('Could not launch $_urlGit');
   }
 }
 
-Future<void> _launchLinkedin() async {
-  final Uri _urlLink = Uri.parse('https://www.linkedin.com/in/hamdi-akram');
+Future<void> _launchInstagram() async {
+  final Uri _urlInsta =
+      Uri.parse('https://www.instagram.com/aziz__chtourou__/');
+  if (!await launchUrl(_urlInsta)) {
+    throw Exception('Could not launch $_urlInsta');
+  }
+}
+
+Future<void> _launchMaps() async {
+  final Uri _urlLink = Uri.parse('https://maps.app.goo.gl/Lj1NUgTc2DiianuA9');
   if (!await launchUrl(_urlLink)) {
     throw Exception('Could not launch $_urlLink');
   }
 }
-Future<void> _launchInstagram() async {
-  final Uri _urlInsta = Uri.parse('https://instagram.com/');
-  if (!await launchUrl(_urlInsta)) {
-    throw Exception('Could not launch $_urlInsta');
-  }
+
+Widget buildContact() => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Appelez Moi : ",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54),
+          ),
+          GestureDetector(
+            onTap: () {
+              _callNumber();
+            },
+            child: ListTile(
+              leading: Icon(
+                FontAwesomeIcons.whatsapp,
+                size: 30,
+                color: Color(0xFF3081D0),
+              ),
+              title: Text('+216 29 579 776'),
+            ),
+          ),
+        ],
+      ),
+    );
+
+Widget buildMail() => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Contactez Moi : ",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54),
+          ),
+          GestureDetector(
+            onTap: () {
+              _sendEmail();
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.email,
+                size: 30,
+                color: Color(0xFF3081D0),
+              ),
+              title: Text('azizchtourou330@gmail.com'),
+            ),
+          ),
+        ],
+      ),
+    );
+
+Widget buildAdresse() => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Adresse : ",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54),
+          ),
+          GestureDetector(
+            onTap: () {
+              _launchMaps();
+            },
+            child: ListTile(
+              leading: Icon(
+                Iconsax.location,
+                size: 30,
+                color: Color(0xFF3081D0),
+              ),
+              title: Text("Sakiet Ezzit, Route Tunis, Sfax"),
+            ),
+          ),
+        ],
+      ),
+    );
+Widget buildTranslate() => Container(
+  padding: const EdgeInsets.symmetric(horizontal: 20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        "Traduire",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(height: 10),
+      _buildLanguageRow('icons/flags/svg/tn.svg', 'Arabe',
+          'icons/flags/svg/fr.svg', 'Français',
+          'icons/flags/svg/gb.svg', 'Anglais'),
+    ],
+  ),
+);
+
+Widget _buildLanguageRow(
+    String flagPath1,
+    String language1,
+    String flagPath2,
+    String language2,
+    String flagPath3,
+    String language3,
+    ) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      _buildLanguageTile(flagPath1, language1),
+      _buildLanguageTile(flagPath2, language2),
+      _buildLanguageTile(flagPath3, language3),
+    ],
+  );
+}
+
+Widget _buildLanguageTile(String flagPath, String language) {
+  return Container(
+    width: 105,
+    height: 115,
+    child: Card(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              flagPath,
+              package: 'country_icons',
+              height: 20,
+            ),
+            const SizedBox(height: 5),
+            Text(
+              language,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
