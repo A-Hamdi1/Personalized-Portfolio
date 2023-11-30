@@ -38,7 +38,7 @@ class _AboutPageState extends State<AboutPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MyBottomNavBar()),
+                MaterialPageRoute(builder: (context) => const MyBottomNavBar()),
               );
             },
             icon: const Icon(
@@ -61,13 +61,13 @@ class _AboutPageState extends State<AboutPage> {
                     Stack(
                       alignment: Alignment.bottomRight,
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 50,
                           backgroundImage: AssetImage("images/me.jpg"),
                         ),
                         InkWell(
                           onTap: () {},
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             radius: 13,
                             backgroundColor: TColors.primary,
                             child: Icon(
@@ -78,8 +78,8 @@ class _AboutPageState extends State<AboutPage> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
+                    const Padding(
+                      padding: EdgeInsets.all(20.0),
                       child: Text("Aziz Chtourou",
                           style: TextStyle(
                               fontSize: 24, fontWeight: FontWeight.bold)),
@@ -101,23 +101,23 @@ class _AboutPageState extends State<AboutPage> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             buildContact(),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildMail(),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildAdresse(),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             buildTranslate(),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
           ],
@@ -130,12 +130,12 @@ class _AboutPageState extends State<AboutPage> {
     return ElevatedButton(
       onPressed: ontap,
       style: ElevatedButton.styleFrom(
-        padding: EdgeInsets.symmetric(horizontal: 45.0, vertical: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 45.0, vertical: 16.0),
         backgroundColor: Colors.black26,
       ),
       child: Text(
         txt,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
@@ -215,7 +215,7 @@ Widget buildContact() => Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Appelez Moi : ",
             style: TextStyle(
                 fontSize: 20,
@@ -226,7 +226,7 @@ Widget buildContact() => Container(
             onTap: () {
               _callNumber();
             },
-            child: ListTile(
+            child: const ListTile(
               leading: Icon(
                 FontAwesomeIcons.whatsapp,
                 size: 30,
@@ -244,7 +244,7 @@ Widget buildMail() => Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Contactez Moi : ",
             style: TextStyle(
                 fontSize: 20,
@@ -255,7 +255,7 @@ Widget buildMail() => Container(
             onTap: () {
               _sendEmail();
             },
-            child: ListTile(
+            child: const ListTile(
               leading: Icon(
                 Icons.email,
                 size: 30,
@@ -273,7 +273,7 @@ Widget buildAdresse() => Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Adresse : ",
             style: TextStyle(
                 fontSize: 20,
@@ -284,7 +284,7 @@ Widget buildAdresse() => Container(
             onTap: () {
               _launchMaps();
             },
-            child: ListTile(
+            child: const ListTile(
               leading: Icon(
                 Iconsax.location,
                 size: 30,

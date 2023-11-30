@@ -24,13 +24,13 @@ class Assets {
   static const String imagesNike = 'images/nike.png';
   static const String imagesQuality = 'images/quality.svg';
   static const String imagesReward = 'images/reward.svg';
-  static const String skillsWebsite1 = 'assets/skills/website1.jpg';
-  static const String skillsWebsite2 = 'assets/skills/website2.jpg';
-  static const String skillsWebsite3 = 'assets/skills/website3.jpg';
-  static const String skillsWebsite4 = 'assets/skills/website4.jpg';
-  static const String skillsWebsite5 = 'assets/skills/website5.jpg';
-  static const String skillsWebsite6 = 'assets/skills/website6.jpg';
-  static const String skillsWebsite7 = 'assets/skills/website7.jpg';
-  static const String skillsWebsite8 = 'assets/skills/website8.jpg';
+  static const String projectsWebsite1 = 'assets/projects/website1.jpg';
+  static const String projectsWebsite2 = 'assets/projects/website2.jpg';
+  static const String projectsWebsite3 = 'assets/projects/website3.jpg';
+  static const String projectsWebsite4 = 'assets/projects/website4.jpg';
+  static const String projectsWebsite5 = 'assets/projects/website5.jpg';
+  static const String projectsWebsite6 = 'assets/projects/website6.jpg';
+  static const String projectsWebsite7 = 'assets/projects/website7.jpg';
+  static const String projectsWebsite8 = 'assets/projects/website8.jpg';
 
 }
