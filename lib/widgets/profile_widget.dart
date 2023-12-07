@@ -3,6 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:portfolio/widgets/txt_widget.dart';
 import 'package:country_icons/country_icons.dart';
+import 'package:provider/provider.dart';
+
+import '../constant/Colors.dart';
+import '../constant/theme_functions.dart';
+import '../constant/theme_provider.dart';
 
 void main() => runApp(const ProfileWidget());
 
@@ -14,13 +19,28 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
-      body: ListView(
+      backgroundColor: darkMode ? TColors.black : Color(0xFFF5F7F8),
+
+    body: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           buildTop(),
           buildContent(),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          themeProvider.toggleTheme();
+        },
+        child: Icon(
+          Icons.brightness_4,
+          color: Colors.white,
+        ),
+        backgroundColor: darkMode ? Colors.lightBlueAccent : Colors.grey,
       ),
     );
   }
@@ -68,7 +88,8 @@ class ProfileWidget extends StatelessWidget {
           const SizedBox(height: 8),
           const Text(
             'Développeur ',
-            style: TextStyle(fontSize: 16, color: Colors.black),
+            style: TextStyle(fontSize: 16,
+  ),
           ),
           const SizedBox(height: 16),
           const Divider(),

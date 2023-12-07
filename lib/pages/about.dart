@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../components/navbar_page.dart';
 import '../constant/Colors.dart';
+import '../constant/theme_functions.dart';
+import '../constant/theme_provider.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -16,9 +20,12 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: darkMode ? TColors.black : Colors.white,
         elevation: 0,
         actions: [
           Padding(
@@ -48,80 +55,93 @@ class _AboutPageState extends State<AboutPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 55.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(
-                      alignment: Alignment.bottomRight,
-                      children: [
-                        const CircleAvatar(
-                          radius: 50,
-                          backgroundImage: AssetImage("images/me.jpg"),
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: const CircleAvatar(
-                            radius: 13,
-                            backgroundColor: TColors.primary,
-                            child: Icon(
-                              Icons.verified,
-                              color: Colors.white,
+      body: Container(
+        color: darkMode ? TColors.black : Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                color: darkMode ? TColors.black : Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 55.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Stack(
+                        alignment: Alignment.bottomRight,
+                        children: [
+                          const CircleAvatar(
+                            radius: 50,
+                            backgroundImage: AssetImage("images/me.jpg"),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: const CircleAvatar(
+                              radius: 13,
+                              backgroundColor: TColors.primary,
+                              child: Icon(
+                                Icons.verified,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Text("Aziz Chtourou",
-                          style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold)),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        buildSocialIcon(
-                            FontAwesomeIcons.instagram, _launchInstagram),
-                        const SizedBox(width: 12),
-                        buildSocialIcon(FontAwesomeIcons.github, _launchGithub),
-                        const SizedBox(width: 12),
-                        buildSocialIcon(
-                            FontAwesomeIcons.facebook, _launchFacebook),
-                        const SizedBox(width: 12),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Text("Aziz Chtourou",
+                            style: TextStyle(
+                                fontSize: 24, fontWeight: FontWeight.bold)),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          buildSocialIcon(
+                              FontAwesomeIcons.instagram, _launchInstagram),
+                          const SizedBox(width: 12),
+                          buildSocialIcon(FontAwesomeIcons.github, _launchGithub),
+                          const SizedBox(width: 12),
+                          buildSocialIcon(
+                              FontAwesomeIcons.facebook, _launchFacebook),
+                          const SizedBox(width: 12),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            buildContact(),
-            const SizedBox(
-              height: 10,
-            ),
-            buildMail(),
-            const SizedBox(
-              height: 10,
-            ),
-            buildAdresse(),
-            const SizedBox(
-              height: 10,
-            ),
-            buildTranslate(),
-            const SizedBox(
-              height: 40,
-            ),
-          ],
+              const SizedBox(
+                height: 50,
+              ),
+              buildContact(),
+              const SizedBox(
+                height: 10,
+              ),
+              buildMail(),
+              const SizedBox(
+                height: 10,
+              ),
+              buildAdresse(),
+              const SizedBox(
+                height: 10,
+              ),
+              buildTranslate(),
+              const SizedBox(
+                height: 40,
+              ),
+            ],
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          themeProvider.toggleTheme();
+        },
+        child: Icon(
+          Icons.brightness_4,
+          color: Colors.white,
+        ),
+        backgroundColor: darkMode ? Colors.lightBlueAccent : Colors.grey,
       ),
     );
   }
@@ -141,22 +161,22 @@ class _AboutPageState extends State<AboutPage> {
   }
 
   Widget buildSocialIcon(IconData icon, onTap) => CircleAvatar(
-        radius: 25,
-        child: Material(
-          shape: const CircleBorder(),
-          clipBehavior: Clip.hardEdge,
-          color: Colors.black38,
-          child: InkWell(
-            onTap: onTap,
-            child: Center(
-                child: Icon(
+    radius: 25,
+    child: Material(
+      shape: const CircleBorder(),
+      clipBehavior: Clip.hardEdge,
+      color: Colors.black38,
+      child: InkWell(
+        onTap: onTap,
+        child: Center(
+            child: Icon(
               icon,
               size: 32,
               color: Colors.white,
             )),
-          ),
-        ),
-      );
+      ),
+    ),
+  );
 }
 
 void _callNumber() async {
@@ -182,7 +202,7 @@ void _sendEmail() async {
 
 Future<void> _launchFacebook() async {
   final Uri _urlFac =
-      Uri.parse('https://www.facebook.com/profile.php?id=100082276860382');
+  Uri.parse('https://www.facebook.com/profile.php?id=100082276860382');
   if (!await launchUrl(_urlFac)) {
     throw Exception('Could not launch $_urlFac');
   }
@@ -197,7 +217,7 @@ Future<void> _launchGithub() async {
 
 Future<void> _launchInstagram() async {
   final Uri _urlInsta =
-      Uri.parse('https://www.instagram.com/aziz__chtourou__/');
+  Uri.parse('https://www.instagram.com/aziz__chtourou__/');
   if (!await launchUrl(_urlInsta)) {
     throw Exception('Could not launch $_urlInsta');
   }
@@ -211,91 +231,90 @@ Future<void> _launchMaps() async {
 }
 
 Widget buildContact() => Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Appelez Moi : ",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black54),
-          ),
-          GestureDetector(
-            onTap: () {
-              _callNumber();
-            },
-            child: const ListTile(
-              leading: Icon(
-                FontAwesomeIcons.whatsapp,
-                size: 30,
-                color: Color(0xFF3081D0),
-              ),
-              title: Text('+216 29 579 776'),
+  padding: const EdgeInsets.symmetric(horizontal: 20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        "Appelez Moi : ",
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
             ),
-          ),
-        ],
       ),
-    );
+      GestureDetector(
+        onTap: () {
+          _callNumber();
+        },
+        child: const ListTile(
+          leading: Icon(
+            FontAwesomeIcons.whatsapp,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text('+216 29 579 776'),
+        ),
+      ),
+    ],
+  ),
+);
 
 Widget buildMail() => Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Contactez Moi : ",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black54),
-          ),
-          GestureDetector(
-            onTap: () {
-              _sendEmail();
-            },
-            child: const ListTile(
-              leading: Icon(
-                Icons.email,
-                size: 30,
-                color: Color(0xFF3081D0),
-              ),
-              title: Text('azizchtourou330@gmail.com'),
-            ),
-          ),
-        ],
+  padding: const EdgeInsets.symmetric(horizontal: 20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        "Contactez Moi : ",
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,),
       ),
-    );
+      GestureDetector(
+        onTap: () {
+          _sendEmail();
+        },
+        child: const ListTile(
+          leading: Icon(
+            Icons.email,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text('azizchtourou330@gmail.com'),
+        ),
+      ),
+    ],
+  ),
+);
 
 Widget buildAdresse() => Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Adresse : ",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black54),
-          ),
-          GestureDetector(
-            onTap: () {
-              _launchMaps();
-            },
-            child: const ListTile(
-              leading: Icon(
-                Iconsax.location,
-                size: 30,
-                color: Color(0xFF3081D0),
-              ),
-              title: Text("Sakiet Ezzit, Route Tunis, Sfax"),
-            ),
-          ),
-        ],
+  padding: const EdgeInsets.symmetric(horizontal: 20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        "Adresse : ",
+        style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,),
       ),
-    );
+      GestureDetector(
+        onTap: () {
+          _launchMaps();
+        },
+        child: const ListTile(
+          leading: Icon(
+            Iconsax.location,
+            size: 30,
+            color: Color(0xFF3081D0),
+          ),
+          title: Text("Sakiet Ezzit, Route Tunis, Sfax"),
+        ),
+      ),
+    ],
+  ),
+);
+
 Widget buildTranslate() => Container(
   padding: const EdgeInsets.symmetric(horizontal: 20),
   child: Column(
@@ -309,36 +328,34 @@ Widget buildTranslate() => Container(
         ),
       ),
       const SizedBox(height: 10),
-      _buildLanguageRow('icons/flags/svg/tn.svg', 'Arabe',
-          'icons/flags/svg/fr.svg', 'Français',
-          'icons/flags/svg/gb.svg', 'Anglais'),
+      _buildLanguageRow([
+        {'flagPath': 'icons/flags/svg/tn.svg', 'language': 'Arabe'},
+        {'flagPath': 'icons/flags/svg/fr.svg', 'language': 'Français'},
+        {'flagPath': 'icons/flags/svg/gb.svg', 'language': 'Anglais'},
+      ]),
     ],
   ),
 );
 
-Widget _buildLanguageRow(
-    String flagPath1,
-    String language1,
-    String flagPath2,
-    String language2,
-    String flagPath3,
-    String language3,
-    ) {
+Widget _buildLanguageRow(List<Map<String, String>> languages) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      _buildLanguageTile(flagPath1, language1),
-      _buildLanguageTile(flagPath2, language2),
-      _buildLanguageTile(flagPath3, language3),
-    ],
+    children: languages
+        .map((language) => _buildLanguageTile(
+      language['flagPath']!,
+      language['language']!,
+    ))
+        .toList(),
   );
 }
 
 Widget _buildLanguageTile(String flagPath, String language) {
+
   return Container(
     width: 105,
     height: 115,
     child: Card(
+      color: Colors.white30,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

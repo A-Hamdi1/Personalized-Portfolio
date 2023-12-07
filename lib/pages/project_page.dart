@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/navbar_page.dart';
 import '../constant/Colors.dart';
+import '../constant/theme_functions.dart';
+import '../constant/theme_provider.dart';
 
 class Projet {
   final int id;
@@ -18,9 +21,10 @@ class ProjectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         actions: [
           Padding(
@@ -59,7 +63,8 @@ class ProjectPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.black54,
+                color: darkMode ?  TColors.white: TColors.black,
+
               ),
             ),
           ),
@@ -72,7 +77,7 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 0,
-                    nom: 'Ecommerce',
+                    nom: 'Coif Platform',
                     imagePath: 'assets/projects/website8.jpg',
                   ),
                 ),
@@ -80,7 +85,7 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 1,
-                    nom: 'Project 2',
+                    nom: 'Government Platform',
                     imagePath: 'assets/projects/website2.jpg',
                   ),
                 ),
@@ -88,7 +93,7 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 2,
-                    nom: 'Project 3',
+                    nom: 'Platform 2',
                     imagePath: 'assets/projects/website3.jpg',
                   ),
                 ),
@@ -96,7 +101,7 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 3,
-                    nom: 'Project 4',
+                    nom: 'Platform 3',
                     imagePath: 'assets/projects/website4.jpg',
                   ),
                 ),
@@ -104,7 +109,7 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 4,
-                    nom: 'Project 5',
+                    nom: 'Platform 4',
                     imagePath: 'assets/projects/website5.jpg',
                   ),
                 ),
@@ -112,7 +117,7 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 5,
-                    nom: 'Project 6',
+                    nom: 'Platform 5',
                     imagePath: 'assets/projects/website6.jpg',
                   ),
                 ),
@@ -120,16 +125,8 @@ class ProjectPage extends StatelessWidget {
                   context,
                   Projet(
                     id: 6,
-                    nom: 'Project 7',
+                    nom: 'Platform 6',
                     imagePath: 'assets/projects/website7.jpg',
-                  ),
-                ),
-                buildCard(
-                  context,
-                  Projet(
-                    id: 7,
-                    nom: 'Project 8',
-                    imagePath: 'assets/projects/website8.jpg',
                   ),
                 ),
               ],
@@ -137,10 +134,22 @@ class ProjectPage extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          themeProvider.toggleTheme();
+        },
+        child: Icon(
+          Icons.brightness_4,
+          color: Colors.white,
+        ),
+        backgroundColor: darkMode ? Colors.lightBlueAccent : Colors.grey,
+      ),
     );
   }
 
   Widget buildCard(BuildContext context, Projet projet) {
+    final darkMode = THelperFunctions.isDarkMode(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final cardWidth = MediaQuery.of(context).size.width * 3 / 4;
     final imageWidth = cardWidth * 3 / 4;
 
@@ -159,9 +168,9 @@ class ProjectPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF3081D0),
+                  color: darkMode ?  TColors.white: Colors.black87,
                 ),
-              ),
+                ),
               SizedBox(height: 8),
               Image.asset(
                 projet.imagePath,

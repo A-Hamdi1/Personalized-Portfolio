@@ -24,6 +24,7 @@ class Assets {
   static const String imagesNike = 'images/nike.png';
   static const String imagesQuality = 'images/quality.svg';
   static const String imagesReward = 'images/reward.svg';
+  static const String projectsCvIcon = 'assets/projects/cv_icon.png';
   static const String projectsWebsite1 = 'assets/projects/website1.jpg';
   static const String projectsWebsite2 = 'assets/projects/website2.jpg';
   static const String projectsWebsite3 = 'assets/projects/website3.jpg';
