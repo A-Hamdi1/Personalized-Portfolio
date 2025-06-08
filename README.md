@@ -1,4 +1,4 @@
-# Portfolio CV Personnalisé
+# Portfolio Personnalisé
 
 ## 📱 Aperçu
 
@@ -49,8 +49,8 @@ lib/
 
 2. **Cloner le dépôt**
    ```bash
-   git clone https://github.com/A-Hamdi1/cv-personalise.git
-   cd cv-personalise
+   git clone https://github.com/A-Hamdi1/Personalized-Portfolio.git
+   cd Personalized-Portfolio
    ```
 
 3. **Installer les dépendances**
