@@ -43,7 +43,7 @@ lib/
 ## 🚀 Installation
 
 1. **Prérequis**
-   - Flutter SDK (version 3.1.0 ou supérieure)
+   - Flutter SDK (version 3.5.0 ou supérieure)
    - Dart SDK (version compatible avec Flutter)
    - Un éditeur de code (VS Code, Android Studio, etc.)
 
